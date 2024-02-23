@@ -5,6 +5,7 @@ class EspressoDetailPage extends StatefulWidget {
   final String price;
   final String imageUrl;
   final String description;
+  final String rating;
 
   const EspressoDetailPage({
     required Key key,
@@ -12,6 +13,7 @@ class EspressoDetailPage extends StatefulWidget {
     required this.price,
     required this.imageUrl,
     required this.description,
+    required this.rating,
   }) : super(key: key);
 
   @override
@@ -38,15 +40,26 @@ class _EspressoDetailPageState extends State<EspressoDetailPage> {
                 width: 200,
                 height: 200,
               ),
-              SizedBox(height: 20),
-              Text(
-                widget.title,
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              Row(
+                children: [
+                  Icon(Icons.star, color: Colors.yellow, size: 20.0), // Adjust icon size as needed
+                  Text(widget.rating, style: TextStyle(fontSize: 15)), // Adjust font size as needed
+                ],
               ),
-              Text(
-                'Price: ${widget.price}',
-                style: TextStyle(fontSize: 18),
-              ),
+              SizedBox(height: 4.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                Text(
+                  widget.title,
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  'Price: ${widget.price}',
+                  style: TextStyle(fontSize: 18),
+                ),
+              ],),
+
               SizedBox(height: 20),
               ExpansionTile(
                 title: Text(

@@ -1,5 +1,4 @@
-import 'package:demo_project1/test_page.dart';
-import 'package:demo_project1/test_page2.dart';
+
 import 'package:demo_project1/toordercoffee.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -121,7 +120,7 @@ class _CoffeeHomePage1State extends State<CoffeeHomePage1> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children:  <Widget>[
-                  IconButton(onPressed: (){}, icon: Icon(Icons.filter_list),tooltip: 'Filter',),
+                  IconButton(onPressed: (){}, icon: Icon(Icons.filter_list,color: Colors.white,),tooltip: 'Filter',),
                   SizedBox(width: 10.0),
                   Expanded(
                     child: SingleChildScrollView(
@@ -134,7 +133,15 @@ class _CoffeeHomePage1State extends State<CoffeeHomePage1> {
                               onPressed: () {
                                 Get.find<FilterController>().setFilter(filter);
                               },
-                              child: Text(filter),
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.orange, // Set your desired background color here
+                              ),
+                              child: Text(filter,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18.0,
+                                ),
+                              ),
                             ),
                           );
                         }).toList(),
@@ -161,6 +168,10 @@ class _CoffeeHomePage1State extends State<CoffeeHomePage1> {
                   },
                 ),
               ),
+
+              Column(children: [
+
+              ],)
 
             ],
           ),
@@ -217,15 +228,15 @@ List<Widget> _buildBoxes(String selectedFilter) {
 
   if (selectedFilter == 'Espresso') {
     // Add two types of Espresso boxes
-    boxes.add(_buildBox('Espresso with Milk', '4.5', '\$5.99', '/nice.jpeg','This is a description of the Espresso with Milk. ' +
+    boxes.add(_buildBox('Espresso with Milk', '4.5', '\$5.99', 'assets/nice.jpeg','This is a description of the Espresso with Milk. ' +
         'It contains details about its origin, flavor, and preparation process.',));
-    boxes.add(_buildBox('Espresso with Cream', '4.0', '\$6.99', '/Almond Joy Coffee Creamer.jpeg','This is a description of the Espresso with Milk. ' +
+    boxes.add(_buildBox('Espresso with Cream', '4.0', '\$6.99', 'assets/Almond Joy Coffee Creamer.jpeg','This is a description of the Espresso with Milk. ' +
         'It contains details about its origin, flavor, and preparation process.',));
   } else if (selectedFilter == 'Cappuccino') {
     // Add three types of Cappuccino boxes
-    boxes.add(_buildBox('Cappuccino', '4.3', '\$4.99', '/cappuccino1.jpeg',"A classic cappuccino prepared with equal parts of espresso, steamed milk, and milk foam. The rich espresso blends harmoniously with the velvety milk, creating a creamy texture with a bold coffee flavor. Topped with a light dusting of cocoa or cinnamon for a delightful finish."));
-    boxes.add(_buildBox('Caramel Cappuccino', '4.2', '\$5.49', '/cappuccino2.jpeg',"Indulge in the decadent sweetness of a caramel cappuccino. Crafted with freshly brewed espresso, creamy steamed milk, and a generous swirl of smooth caramel syrup. The caramel infusion adds a delightful sweetness to the rich coffee notes, creating a luxurious and comforting beverage perfect for any time of day."));
-    boxes.add(_buildBox('Hazelnut Cappuccino', '4.1', '\$5.99', '/cappuccino3.jpeg',"Experience the nutty richness of a hazelnut cappuccino. Made with freshly brewed espresso, steamed milk, and a hint of velvety hazelnut flavoring. The aromatic essence of hazelnut complements the robust coffee flavors, offering a warm and satisfying drink that delights the senses with every sip."));
+    boxes.add(_buildBox('Cappuccino', '4.3', '\$4.99', 'assets/cappuccino1.jpeg',"A classic cappuccino prepared with equal parts of espresso, steamed milk, and milk foam. The rich espresso blends harmoniously with the velvety milk, creating a creamy texture with a bold coffee flavor. Topped with a light dusting of cocoa or cinnamon for a delightful finish."));
+    boxes.add(_buildBox('Caramel Cappuccino', '4.2', '\$5.49', 'assets/cappuccino2.jpeg',"Indulge in the decadent sweetness of a caramel cappuccino. Crafted with freshly brewed espresso, creamy steamed milk, and a generous swirl of smooth caramel syrup. The caramel infusion adds a delightful sweetness to the rich coffee notes, creating a luxurious and comforting beverage perfect for any time of day."));
+    boxes.add(_buildBox('Hazelnut Cappuccino', '4.1', '\$5.99', 'assets/cappuccino3.jpeg',"Experience the nutty richness of a hazelnut cappuccino. Made with freshly brewed espresso, steamed milk, and a hint of velvety hazelnut flavoring. The aromatic essence of hazelnut complements the robust coffee flavors, offering a warm and satisfying drink that delights the senses with every sip."));
   }
 
   return boxes;
@@ -239,8 +250,9 @@ Widget _buildBox(String title, String rating, String price, String imageUrl,Stri
         key: ValueKey('espresso_detail_page'), // Provide a key here
         title: title,
         price: price,
-        imageUrl: 'assets/$imageUrl',
+        imageUrl: imageUrl,
         description: description,
+        rating:rating,
       ));
 
     },
@@ -263,7 +275,7 @@ Widget _buildBox(String title, String rating, String price, String imageUrl,Stri
             width: double.infinity,
             height: 80, // Adjust the image height as needed
             child: Image.asset(
-              'assets/$imageUrl',
+              imageUrl,
               fit: BoxFit.cover,
             ),
           ),
@@ -296,13 +308,16 @@ Widget _buildBox(String title, String rating, String price, String imageUrl,Stri
                     key: ValueKey('espresso_detail_page'), // Provide a key here
                     title: title,
                     price: price,
-                    imageUrl: 'assets/$imageUrl',
-                    description: description,
+                    imageUrl: imageUrl,
+                    description: description, rating: rating,
                   ));
                 },
               ),
             ],
           ),
+          Column(children: [
+
+          ],)
         ],
       ),
     ),
